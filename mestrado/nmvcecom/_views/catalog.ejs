@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<script type="text/javascript">
+    function editProduct(id) {
+        document.getElementById("h_productlist").value = id;
+        submitform();
+    }
+
+    function submitform() {
+        document.getElementById("_productslist").submit();
+    }
+
+
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li>
+                <form method="get" action="/newproductview">
+                    <input type="submit" value="Adicionar produto" />
+                </form>
+            </li>
+            <li>
+
+                <form method="get" action="/">
+                    <input type="submit" value="Retornar" />
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <form method="post" id="_productslist" action="/CatalogDetail">
+            <div>
+                <ul>
+                    <% for(p in products) { %>
+                    <li>
+                        <% if (products[p].picture !=undefined) { %>
+                        <img class="product_image" src="<%= products[p].picture%>" />
+                        <% } %>
+                        <%= products[p].name%>
+                        <%= products[p].description%>
+                        <%= products[p].price%>
+                        <input type="button" value="Editar" onclick="editProduct('<%= products[p]._id %>');" />
+                    </li>
+                    <% } %>
+
+                </ul>
+            </div>
+            <input type="hidden" id="h_productlist" name="h_productlist" value="" />
+        </form>
+    </div>
+
+
+
+</body>
+</html>

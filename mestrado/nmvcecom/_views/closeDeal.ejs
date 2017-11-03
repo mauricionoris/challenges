@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li>
+                <form method="get" action="/">
+                    <input type="submit" value="Retornar" />
+                </form>
+            </li>
+            <li>
+                <p>Compra concluída com sucesso</p>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main">
+        <ul>
+            <li>
+               Número de itens: <%=cart.numberofitems%>  <br/>
+               Valor total da compra: <%=cart.totalamount%> <br />
+               Produtos: 
+                <ul> 
+                    <% for (var c=0; c < cart.basket.length;c++) {%>
+                    <li>
+                        <% for (p in products) {%>
+                            <%if (products[p]._id==cart.basket[c].product_id) {%>
+                                <% if (products[p].picture !=undefined) { %>
+                                <img class="product_image" src="<%= products[p].picture%>" />
+                                <% } %>
+                              <% break; %>
+                            <% } %>
+                        <% } %>
+                        Quantidate: <%=cart.basket[c].quantity%>
+                        Valor: <%=cart.basket[c].amount%>
+                    </li>
+                    <% } %>
+                 </ul>
+             </li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

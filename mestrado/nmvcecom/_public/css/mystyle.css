@@ -1,0 +1,57 @@
+﻿body {
+    background-color: white;
+}
+
+.menu {
+    
+    top: 0px;
+    left: 0px;
+    width:100%;
+   
+}
+.menu ul {
+    list-style-type:none;
+  
+}
+.menu li { 
+    padding:4px;
+
+  
+}
+
+.cart  {
+
+  border:dotted;
+      
+ }
+.cart ul {
+    list-style-type: none;
+}
+.cart li {
+    padding:4px;
+   
+    display:inline-block;
+}
+
+.main {
+    background-color:white;
+     left: 500px;
+     width:100%;
+
+}
+.main ul {
+   list-style-type: none;
+}
+.main li { 
+  
+   border:solid 1px;
+   border-color:cadetblue;
+   padding:4px;
+   margin:4px;
+}
+
+.product_image  {
+    height:70px;
+    width:70px;
+  
+}

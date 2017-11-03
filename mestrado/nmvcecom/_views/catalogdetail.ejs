@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<script type="text/javascript">
+    function fnavailable(v) {
+        document.getElementById("productavailable").value = v;
+        document.getElementById("productavailable").checked = v;
+    }
+
+    function fnavailablechange() {
+        fnavailable(!document.getElementById("productavailable").value);
+    }
+
+    
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload="fnavailable('<%= product[0].available%>');">
+    <form method="post" action="/updateProduct"> 
+        <div class="main">
+           <h2> Editar Produto </h2>
+
+               <ul>
+                <li>
+              
+                    <% if (product[0].picture !=undefined) { %>
+                    <img   class="product_image" src="<%= product[0].picture%>" />
+                    <% } %>
+                </li>
+                <li>
+
+                    Nome:
+                    <input type="text" name="productname" value="<%= product[0].name%>"><br />
+
+                    Descrição:
+                    <input type="text" name="productdescription" value="<%= product[0].description%>"><br />
+
+                    Preço:
+                    <input type="number" name="productprice" value="<%= product[0].price%>"><br />
+
+                    Disponível:
+                    <input type="checkbox" id="productavailable" name="productavailable" onclick="fnavailablechange();">  <br />
+                </li>
+            </ul>
+            <input type="submit" value="Alterar Produto">
+        </div>
+        <input type="hidden" name="h_productid" value="<%= product[0]._id%>">
+
+     </form>
+
+
+    <form method="get" action="/catalog">
+        <input type="submit" value="Retornar" />
+    </form>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li>
+
+                <form method="post" action="/closeDeal">
+                    <input type="hidden" name="h_cart" value="<%= cart%>">
+                    <input type="submit" value="Fechar a compra" />
+                </form>
+            </li>
+            <li>
+                <form method="get" action="/">
+                    <input type="submit" value="Cancelar" />
+                </form>
+            </li>
+            <li>
+                <p>Lista de produtos aquiridos:</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="main">
+              <ul>
+               <% var mycart = JSON.parse(cart);%>
+               <% for(p in products) { %>
+                <li>
+                    <% if (products[p].picture !=undefined) { %>
+                    <img class="product_image" src="<%= products[p].picture%>" />
+                    <% } %>
+                    <%= products[p].name%>
+                    <%= products[p].description%>
+                    <%= products[p].price%>
+
+                    <% for (c in mycart.products) {%>
+                            <%if (mycart.products[c].Id == products[p]._id) {%>
+                                Quantidade:<input type="text" value="<%=mycart.products[c].quantity%>" />
+                                Valor Unitário:<input type="text" value="<%=mycart.products[c].unitprice%>" />
+                                Total:<input type="text" value="<%=mycart.products[c].quantity*mycart.products[c].unitprice%>" />
+                                <%break;%>   
+                   
+                        <% } %>
+                    <% } %>
+                </li>
+                <% } %>
+            </ul>
+    </div>
+
+
+</body>
+</html>

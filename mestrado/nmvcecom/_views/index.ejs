@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<script type="text/javascript">
+    function createCart() {
+
+        var myCart = {};
+        var products = []
+        myCart.products = products;
+
+        document.getElementById("h_cart").value = JSON.stringify(myCart);
+    }
+
+    function editCart(id,qtd,pu) {
+
+        var myCart = JSON.parse(document.getElementById("h_cart").value);
+        var product = {Id: id, quantity: qtd, unitprice: pu  }
+        var bUpdate = false;
+
+        for (var i = 0 ; i < myCart.products.length ; i++) {
+                if (myCart.products[i].Id == id) {
+                   myCart.products[i].quantity = qtd;
+                   myCart.products[i].unitprice = pu;
+                   bUpdate = true;
+                   break;
+               }
+        }
+
+        if (!bUpdate) { myCart.products.push(product); }
+
+        document.getElementById("h_cart").value = JSON.stringify(myCart);
+    }
+
+    function addToCart(id,pu) {
+        document.getElementById('tot_' + id).value = +document.getElementById('tot_' + id).value + 1;
+        document.getElementById('total').value = +document.getElementById('total').value + 1;
+        editCart(id, document.getElementById('tot_' + id).value,pu);
+    }
+
+    function RemoveFromCart(id,pu) {
+        document.getElementById('tot_' + id).value = +document.getElementById('tot_' + id).value - 1;
+        document.getElementById('total').value = +document.getElementById('total').value - 1;
+        editCart(id, document.getElementById('tot_' + id).value,pu);
+    }
+
+   
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body onload="createCart();">
+
+    <div class="menu">
+        <ul>
+            <li>
+                <form name="manageProducts" method="get" action="/catalog">
+                    <input type="submit" value="Gerenciar Produtos" />
+                </form>
+            </li>
+            <li>
+                <form name="viewPastBuys" method="get" action="/pastBuys">
+                    <input type="submit" value="Visualizar compras anteriores" />
+                </form>
+            </li>
+            <li>
+                <form name="about" method="get" action="/about">
+                    <input type="submit" value="Sobre" />
+                </form>
+            </li>
+            <li>
+                <div class="cart">
+                    <form name="buyProduct" method="post" action="/endShop">
+                        <ul>
+                            <li>
+                                <img src="/images/cart.jpeg" />
+                                <input type="number" value="" id="total" />
+                                <input type="submit" value="Fechar compra" />
+                            </li>
+                        </ul>
+                        <input type="hidden" id="h_cart" name="h_cart" value="" />
+                    </form>
+
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main">
+        <ul>
+            <% for(p in products) { %>
+            <li>
+                <% if (products[p].picture !=undefined) { %>
+                <img class="product_image" src="<%= products[p].picture%>" />
+                <% } %>
+                <%= products[p].name%>
+                <%= products[p].description%>
+                <%= products[p].price%>
+                <input type="button" value="Add" onclick="addToCart('<%= products[p]._id %>','<%= products[p].price%>');" />
+                <input type="number" value="" id="tot_<%= products[p]._id %>" />
+                <input type="button" value="Remove" onclick="RemoveFromCart('<%= products[p]._id %>', '<%= products[p].price%>');" />
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+</body>
+</html>
+
+
+

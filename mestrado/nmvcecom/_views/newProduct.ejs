@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<script type="text/javascript">
+
+</script>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>IPT 2015 - Trabalho Sistemas Web</title>
+    <link href="/css/mystyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload="fnaddListener();">
+
+    <form method="post" action="/addProduct">
+        <div class="main">
+            <h2>Adicionar um produto</h2>
+            <br />
+            <ul>
+                <li>
+                    Foto do produto:
+                    <input type="file" name="fileInput" id="fileInput" >
+                </li>
+                <li>
+                    <div id="fileDisplayArea"></div>
+                </li>
+
+                <li>
+                    Nome:
+                    <input type="text" name="productname">
+                </li>
+                <li>
+                    Descrição:
+                    <input type="text" name="productdescription">
+                </li>
+                <li>
+
+                    Preço:
+                    <input type="number" name="productprice">
+                </li>
+                <li>
+
+                    Disponível:
+                    <input type="checkbox" name="productavailable" />
+                </li>
+            </ul>
+            <input type="submit" value="Criar Produto">
+            <input type="hidden" name="productimage" id="productimage">
+
+        </div>
+    </form>
+
+    <script src="/js/images.js"></script>
+
+</body>
+</html>
