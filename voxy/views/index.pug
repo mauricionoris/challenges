@@ -1,0 +1,10 @@
+extends layout
+
+block content
+
+  form(method='POST' action='/wordcounter')
+    div.form-group
+      label(for='enteredText') Please input a text
+      textarea(required class='form-control' rows='10' name='enteredText')
+
+    button(class='btn btn-primary' type='submit') Count words
